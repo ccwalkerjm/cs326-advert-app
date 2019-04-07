@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title></title>
+  <meta name="description" content="" />
+  <meta name="keywords" content="" />
+  <meta name="theme-color" content="#EF4E2A" />
+  <link rel="icon" type="image/png" href="" sizes="32x32" />
+  <link rel="icon" type="image/png" href="" sizes="16x16" />
+  <link rel="manifest" href="manifest.json" />
+  <link rel="stylesheet" href="css/onsenui.css">
+  <link rel="stylesheet" href="css/onsen-css-components.css">
+  <link rel="stylesheet" href="index.css" />
+  <script src="js/onsenui.js"></script>
+  <script src="js/jquery.js"></script>
+  <script src="index.js"></script>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("sw.js")
+        .then(function () {
+          console.log("Service Worker Registered");
+        })
+        .catch(function (e) {
+          console.log(e);
+        });
+    }
+  </script>
+</head>
+
+<body>
+
+ 
+
+
+
+</body>
+
+
+</html>
