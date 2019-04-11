@@ -31,9 +31,87 @@
 </head>
 
 <body>
+<ons-splitter>
+  <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+    <ons-page>
+      <ons-list>
+        <ons-list-item onclick="fn.load('home.html')" tappable>
+          Businesses
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('adverts.html')" tappable>
+          Adverts
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('types.html')" tappable>
+          Types
+        </ons-list-item>
+        <ons-list-item onclick="fn.load('complaints.html')" tappable>
+          complains
+        </ons-list-item></ons-list>
+    </ons-page>
+  </ons-splitter-side>
+  <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+</ons-splitter>
 
+<template id="home.html">
+  <ons-page id="businessPage">
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Businesses
+      </div>
+    </ons-toolbar>
+    <ons-list id="lstBusinesses"></ons-list>
+  </ons-page>
+</template>
+
+<template id="adverts.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        adverts
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template>
+
+<template id="types.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        Types
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template>
  
-
+<template id="complaints.html">
+  <ons-page>
+    <ons-toolbar>
+      <div class="left">
+        <ons-toolbar-button onclick="fn.open()">
+          <ons-icon icon="md-menu"></ons-icon>
+        </ons-toolbar-button>
+      </div>
+      <div class="center">
+        complaints
+      </div>
+    </ons-toolbar>
+  </ons-page>
+</template>
 
 
 </body>
