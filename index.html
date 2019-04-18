@@ -31,87 +31,163 @@
 </head>
 
 <body>
-<ons-splitter>
-  <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
-    <ons-page>
-      <ons-list>
-        <ons-list-item onclick="fn.load('home.html')" tappable>
-          Businesses
-        </ons-list-item>
-        <ons-list-item onclick="fn.load('adverts.html')" tappable>
-          Adverts
-        </ons-list-item>
-        <ons-list-item onclick="fn.load('types.html')" tappable>
-          Types
-        </ons-list-item>
-        <ons-list-item onclick="fn.load('complaints.html')" tappable>
-          complains
-        </ons-list-item></ons-list>
+  <ons-splitter>
+    <ons-splitter-side id="menu" side="left" width="220px" collapse swipeable>
+      <ons-page>
+        <ons-list>
+          <ons-list-item onclick="fn.load('home.html')" tappable>
+            Business
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('adverts.html')" tappable>
+            Adverts
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('types.html')" tappable>
+            Types
+          </ons-list-item>
+          <ons-list-item onclick="fn.load('complaints.html')" tappable>
+            Complains
+          </ons-list-item>
+        </ons-list>
+      </ons-page>
+    </ons-splitter-side>
+    <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
+  </ons-splitter>
+
+  <template id="home.html">
+    <ons-page id="businessPage">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Business
+        </div>
+      </ons-toolbar>
+      <div>
+      <input type="search" value="" placeholder="Search" class="search-input search-input--material" style="width: 100%;">
+        </div>
+      <br>
+      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses" style="display: block;"></ons-list>
+      <ons-list modifier="inset" modifier="longdivider" id="lstPending"></ons-list>
+      <ons-list modifier="inset" modifier="longdivider" id="lstBlocked"></ons-list>
+      <div class="tabbar">
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c" checked="checked">
+          <button class="tabbar__button" id="accepted">
+            <div class="tabbar__label">Accepted</div>
+          </button>
+        </label>
+
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c">
+          <button class="tabbar__button" id="pending">
+            <div class="tabbar__label">Pending</div>
+          </button>
+        </label>
+
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c">
+          <button class="tabbar__button" id="blocked">
+            <div class="tabbar__label">Blocked</div>
+          </button>
+        </label>
+      </div>
     </ons-page>
-  </ons-splitter-side>
-  <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
-</ons-splitter>
+  </template>
 
-<template id="home.html">
-  <ons-page id="businessPage">
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        Businesses
-      </div>
-    </ons-toolbar>
-    <ons-list id="lstBusinesses"></ons-list>
-  </ons-page>
-</template>
+  
+  <template id="adverts.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Adverts
+        </div>
+      </ons-toolbar>
+      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
+        style="width: 100%;">
+      <div class="tabbar">
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c" checked="checked">
+          <button class="tabbar__button">
+            <div class="tabbar__label">Accepted</div>
+          </button>
+        </label>
 
-<template id="adverts.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
-      </div>
-      <div class="center">
-        adverts
-      </div>
-    </ons-toolbar>
-  </ons-page>
-</template>
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c">
+          <button class="tabbar__button">
+            <div class="tabbar__label">Pending</div>
+          </button>
+        </label>
 
-<template id="types.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c">
+          <button class="tabbar__button">
+            <div class="tabbar__label">Blocked</div>
+          </button>
+        </label>
       </div>
-      <div class="center">
-        Types
+    </ons-page>
+  </template>
+
+  <template id="types.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Types
+        </div>
+      </ons-toolbar>
+      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
+        style="width: 100%;">
+      <div id="add-button">
+        <button class="button button--material--flat">Add Business</button>
       </div>
-    </ons-toolbar>
-  </ons-page>
-</template>
- 
-<template id="complaints.html">
-  <ons-page>
-    <ons-toolbar>
-      <div class="left">
-        <ons-toolbar-button onclick="fn.open()">
-          <ons-icon icon="md-menu"></ons-icon>
-        </ons-toolbar-button>
+    </ons-page>
+  </template>
+
+  <template id="complaints.html">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Complaints
+        </div>
+      </ons-toolbar>
+      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
+        style="width: 100%;">
+      <div class="tabbar">
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c" checked="checked">
+          <button class="tabbar__button">
+            <div class="tabbar__label">Complaints</div>
+          </button>
+        </label>
+
+        <label class="tabbar__item">
+          <input type="radio" name="tabbar-c">
+          <button class="tabbar__button">
+            <div class="tabbar__label">Blocked</div>
+          </button>
+        </label>
       </div>
-      <div class="center">
-        complaints
-      </div>
-    </ons-toolbar>
-  </ons-page>
-</template>
+    </ons-page>
+  </template>
 
 
 </body>

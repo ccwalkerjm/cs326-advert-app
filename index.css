@@ -1,0 +1,15 @@
+#add-button{
+    text-align: center;
+    
+} 
+#toggle-button{
+    display: none;
+}
+
+#lstPending{
+    display: none;
+}
+
+#lstBlocked{
+    display: none;
+}
