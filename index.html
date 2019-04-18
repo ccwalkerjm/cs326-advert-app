@@ -64,40 +64,29 @@
         <div class="center">
           Business
         </div>
-      </ons-toolbar>
-      <div>
-      <input type="search" value="" placeholder="Search" class="search-input search-input--material" style="width: 100%;">
+        <div class="right">
+          <ons-search-input placeholder="Search something"></ons-search-input>
         </div>
-      <br>
-      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses" style="display: block;"></ons-list>
-      <ons-list modifier="inset" modifier="longdivider" id="lstPending"></ons-list>
-      <ons-list modifier="inset" modifier="longdivider" id="lstBlocked"></ons-list>
-      <div class="tabbar">
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c" checked="checked">
-          <button class="tabbar__button" id="accepted">
-            <div class="tabbar__label">Accepted</div>
-          </button>
-        </label>
+      </ons-toolbar>
+     
+      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses"></ons-list>
+    
 
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c">
-          <button class="tabbar__button" id="pending">
-            <div class="tabbar__label">Pending</div>
-          </button>
-        </label>
+      <ons-bottom-toolbar>
+        <div class="status-style">
+          <ons-segment id="business-status">
+            <button>Accepted</button>
+            <button>Pending</button>
+            <button>Blocked</button>
+          </ons-segment>
+        </div>
+      </ons-bottom-toolbar>
 
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c">
-          <button class="tabbar__button" id="blocked">
-            <div class="tabbar__label">Blocked</div>
-          </button>
-        </label>
-      </div>
+
     </ons-page>
   </template>
 
-  
+
   <template id="adverts.html">
     <ons-page>
       <ons-toolbar>

@@ -1,16 +1,16 @@
 //List functions and global variables here
 
-const business_status_init = 0;
+//const  business_status_pending = 0;
 const business_status_pending = 1;
-const business_status_approved = 2;
-const business_status_not_approved = 3;
-const business_status_blacklisted = 4;
+const business_status_approved = 0;
+//const business_status_not_approved = 3;
+const business_status_blacklisted = 2;
 
-let bueinesses = [
+let  businesses = [
   {
     id: 34567,
     name: "T&T Company",
-    status: business_status_init
+    status: business_status_pending
   },
   {
     id: 34378,
@@ -20,7 +20,7 @@ let bueinesses = [
   {
     id: 34379,
     name: "ABS Company",
-    status: business_status_init
+    status: business_status_pending
   },
   {
     id: 34372,
@@ -31,34 +31,28 @@ let bueinesses = [
   {
     id: 34371,
     name: "UTECH Company",
-    status: business_status_init
-  }
-];
-
-let peending = [
-{
-  id: 85521,
-  name: "Jamdung City",
-  status: business_status_pending
-},
-{
-  id: 85522,
-  name: "Little Pub",
-  status: business_status_pending
-},
-{
-  id: 85523,
-  name: "Elephant Town",
-  status: business_status_pending
-},
-{
-  id: 85524,
-  name: "Great Pond Primary",
-  status: business_status_pending
-},
-];
-
-let bloocked = [
+    status: business_status_pending
+  },
+  {
+    id: 85521,
+    name: "Jamdung City",
+    status: business_status_pending
+  },
+  {
+    id: 85522,
+    name: "Little Pub",
+    status: business_status_pending
+  },
+  {
+    id: 85523,
+    name: "Elephant Town",
+    status: business_status_pending
+  },
+  {
+    id: 85524,
+    name: "Great Pond Primary",
+    status: business_status_pending
+  },
   {
     id: 48840,
     name: "Gyal Town Club",
@@ -100,86 +94,46 @@ window.fn.load = function(page) {
   content.load(page).then(menu.close.bind(menu));
 };
 
+
+function displayStatus(status){
+  switch(status){
+    case 0:  return "Accepted";
+    case 1:  return "Pending";
+    case 2 : return "Blocked";
+  }
+}
+
+function changeStatus(e) {
+  const index = e.index;
+  const lstBusinesses = document.querySelector("#lstBusinesses");
+
+  lstBusinesses.innerHTML = "";
+
+  for (let i = 0; i <  businesses.length; i++) {
+    const x_business =  businesses[i];
+
+    if (index === x_business.status) {
+      lstBusinesses.appendChild(
+        ons.createElement(`<ons-list-item tappable onclick="alert(event)">
+                              <div class="left"> ${businesses[i].name} </div>  
+                              <div class="center">${ displayStatus(businesses[i].status)}</div>
+                            </ons-list-item>`)
+      )
+    }
+  }
+}
+
+let status_segment;
+
 ons.ready(function() {
   //activate application inside here, including all events...
 
   document.addEventListener("init", function(e) {
     if (e.target.id === "businessPage") {
-      const lstBusinesses = document.querySelector("#lstBusinesses");
-
-      lstBusinesses.innerHTML = "";
-
-      for (let i = 0; i < bueinesses.length; i++) {
-        const item = document.createElement("ons-list-item");
-        item.innerHTML =
-          bueinesses[i].name  + bueinesses[i].status.toString();
-        lstBusinesses.appendChild(item);
-      }
+      status_segment = document.querySelector("#business-status");
+      status_segment.addEventListener("postchange", changeStatus);
+      changeStatus({ index: 0 });
     }
     console.log(e);
   });
-
-  document.addEventListener("init", function(e) {
-    if (e.target.id === "businessPage") {
-      const lstPending = document.querySelector("#lstPending");
-
-      lstPending.innerHTML = "";
-
-      for (let i = 0; i < peending.length; i++) {
-        const item = document.createElement("ons-list-item");
-        item.innerHTML =
-         peending[i].name  + peending[i].status.toString();
-        lstPending.appendChild(item);
-      }
-    }
-    console.log(e);
-  });
-
-  document.addEventListener("init", function(e) {
-    if (e.target.id === "businessPage") {
-      const lstBlocked = document.querySelector("#lstBlocked");
-
-      lstBlocked.innerHTML = "";
-
-      for (let i = 0; i < bloocked.length; i++) {
-        const item = document.createElement("ons-list-item");
-        item.innerHTML =
-         bloocked[i].name  + bloocked[i].status.toString();
-        lstBlocked.appendChild(item);
-      }
-    }
-    console.log(e);
-  });
-
 });
-
-function changeTab() {
-  document.getElementById('tabbar').setActiveTab(1);
-}
-
-document.getElementById('tabbar__button').addEventListener('click', function () {
-  toggle(document.querySelectorAll('.target'));
-});
-
-function toggle (elements, specifiedDisplay) {
-var element, index;
-
-elements = elements.length ? elements : [elements];
-for (index = 0; index < elements.length; index++) {
-  element = elements[index];
-
-  if (isElementHidden(element)) {
-    element.style.display = '';
-
-    // If the element is still hidden after removing the inline display
-    if (isElementHidden(element)) {
-      element.style.display = specifiedDisplay || 'block';
-    }
-  } else {
-    element.style.display = 'none';
-  }
-}
-function isElementHidden (element) {
-  return window.getComputedStyle(element, null).getPropertyValue('display') === 'none';
-}
-}
