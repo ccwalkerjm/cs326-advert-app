@@ -116,7 +116,7 @@ function changeStatus(e) {
       lstBusinesses.appendChild(
         ons.createElement(`<ons-list-item tappable onclick="alert(event)">
                               <div class="left"> ${businesses[i].name} </div>  
-                              <div class="center">${ displayStatus(businesses[i].status)}</div>
+                              <div class="right"> <b>${ displayStatus(businesses[i].status)} </b></div>
                             </ons-list-item>`)
       )
     }

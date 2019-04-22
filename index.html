@@ -13,6 +13,7 @@
   <link rel="stylesheet" href="css/onsenui.css">
   <link rel="stylesheet" href="css/onsen-css-components.css">
   <link rel="stylesheet" href="index.css" />
+  <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
   <script src="js/onsenui.js"></script>
   <script src="js/jquery.js"></script>
   <script src="index.js"></script>
@@ -48,6 +49,12 @@
             Complains
           </ons-list-item>
         </ons-list>
+        
+          <div class="status-style" class="right">
+            <ion-icon  name="settings" tappable onclick="alert(event)" ></ion-icon>
+          </div>
+      
+        
       </ons-page>
     </ons-splitter-side>
     <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
@@ -65,19 +72,21 @@
           Business
         </div>
         <div class="right">
-          <ons-search-input placeholder="Search something"></ons-search-input>
+          <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
         </div>
       </ons-toolbar>
-     
+      <br>
       <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses"></ons-list>
-    
+
 
       <ons-bottom-toolbar>
-        <div class="status-style">
-          <ons-segment id="business-status">
+        <div class="status-style" id="SegmentBars">
+          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
+
             <button>Accepted</button>
             <button>Pending</button>
             <button>Blocked</button>
+
           </ons-segment>
         </div>
       </ons-bottom-toolbar>
@@ -88,7 +97,7 @@
 
 
   <template id="adverts.html">
-    <ons-page>
+    <ons-page id="businessAdverts">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button onclick="fn.open()">
@@ -98,31 +107,23 @@
         <div class="center">
           Adverts
         </div>
+        <div class="right">
+          <i class="icon ion-md-search" tappable onclick="alert(event)" id="search"></i>
+        </div>
       </ons-toolbar>
-      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
-        style="width: 100%;">
-      <div class="tabbar">
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c" checked="checked">
-          <button class="tabbar__button">
-            <div class="tabbar__label">Accepted</div>
-          </button>
-        </label>
+      <!--<input type="search" value="" placeholder="Search" class="search-input search-input--material"
+        style="width: 100%;"> -->
+      <ons-bottom-toolbar>
+        <div class="status-style" id="SegmentBars">
+          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
 
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c">
-          <button class="tabbar__button">
-            <div class="tabbar__label">Pending</div>
-          </button>
-        </label>
+            <button>Accepted</button>
+            <button>Pending</button>
+            <button>Blocked</button>
 
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c">
-          <button class="tabbar__button">
-            <div class="tabbar__label">Blocked</div>
-          </button>
-        </label>
-      </div>
+          </ons-segment>
+        </div>
+      </ons-bottom-toolbar>
     </ons-page>
   </template>
 
@@ -137,12 +138,14 @@
         <div class="center">
           Types
         </div>
+        <div class="right">
+          <i class="icon ion-md-search" tappable onclick="alert(event)" id="search"></i>
+        </div>
       </ons-toolbar>
-      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
-        style="width: 100%;">
-      <div id="add-button">
+        <div id="add-button">
         <button class="button button--material--flat">Add Business</button>
       </div>
+      
     </ons-page>
   </template>
 
@@ -157,28 +160,24 @@
         <div class="center">
           Complaints
         </div>
+        <div class="right">
+          <i class="icon ion-md-search" tappable onclick="alert(event)" id="search"></i>
+        </div>
       </ons-toolbar>
-      <input type="search" value="" placeholder="Search" class="search-input search-input--material"
-        style="width: 100%;">
-      <div class="tabbar">
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c" checked="checked">
-          <button class="tabbar__button">
-            <div class="tabbar__label">Complaints</div>
-          </button>
-        </label>
-
-        <label class="tabbar__item">
-          <input type="radio" name="tabbar-c">
-          <button class="tabbar__button">
-            <div class="tabbar__label">Blocked</div>
-          </button>
-        </label>
-      </div>
+        <ons-bottom-toolbar>
+        <div class="status-style" id="SegmentBars"  >
+          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
+            
+            <button>Complaints</button>
+            <button>Blocked</button>
+          
+          </ons-segment>
+        </div>
+      </ons-bottom-toolbar>
     </ons-page>
   </template>
 
-
+  <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
 </body>
 
 
