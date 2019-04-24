@@ -11,6 +11,7 @@ let  businesses = [
     id: 34567,
     name: "T&T Company",
     status: business_status_pending
+    
   },
   {
     id: 34378,
@@ -124,6 +125,15 @@ function changeStatus(e) {
 }
 
 let status_segment;
+
+// Types Section
+function AddBusiness() {
+  document.getElementById("overlay").style.display = "block";
+}
+
+function Submit() {
+  document.getElementById("overlay").style.display = "none";
+}
 
 ons.ready(function() {
   //activate application inside here, including all events...
