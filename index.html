@@ -48,6 +48,9 @@
           <ons-list-item onclick="fn.load('complaints.html')" tappable>
             Complains
           </ons-list-item>
+          <ons-list-item onclick="fn.load('login.html')" tappable>
+            Login 
+        </ons-list-item>
         </ons-list>
 
         <div class="fixed">
@@ -218,6 +221,47 @@
             <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
           </div>
         </ons-toolbar>
+        
+      </ons-page>
+    </template>
+
+    <template id="login.html">
+      <ons-page>
+        <ons-toolbar>
+          <div class="left">
+            <ons-toolbar-button onclick="fn.open()">
+              <ons-icon icon="md-menu"></ons-icon>
+            </ons-toolbar-button>
+          </div>
+          <div class="center">
+            Login
+          </div>
+        </ons-toolbar>
+        <div class="center">
+          <ons-card id="card">
+              <div class="center">
+                  <b>Login</b>
+                </div>
+             <div class="">
+                <div style="text-align: center; margin-top: 30px;">
+                  <p>
+                    <ons-input id="typeName" modifier="underbar" placeholder="Username" float></ons-input>
+                  </p>
+                  <br>
+                  <p>
+                    <ons-input id="description" modifier="underbar" type="password" placeholder="Password" float>
+                    </ons-input>
+                  </p>
+                  <br>
+                  <p style="margin-top: 30px;">
+                    <ons-button onclick="Submit()">Submit</ons-button>
+                  </p>
+                </div>
+              </div>
+            </ons-card>
+          </div>
+        </div>
+
         
       </ons-page>
     </template>
