@@ -68,3 +68,9 @@ div.fixed {
     cursor: pointer; /* Add a pointer on hover */
 }
 
+#searchBar{
+    position: inherit;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+}

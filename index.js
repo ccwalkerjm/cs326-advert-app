@@ -135,6 +135,16 @@ function Submit() {
   document.getElementById("overlay").style.display = "none";
 }
 
+function SearchBar(){
+  document.getElementById("icons").style.display = "none";
+  document.getElementById("name").style.display = "none";
+  document.getElementById("sidebar").style.display = "none";
+  document.getElementById("expand").style.width = "100%";
+  document.getElementById("searchBar").style.display = "block";
+  
+ 
+}
+
 ons.ready(function() {
   //activate application inside here, including all events...
 

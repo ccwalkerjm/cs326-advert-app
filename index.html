@@ -63,16 +63,18 @@
   <template id="home.html">
     <ons-page id="businessPage">
       <ons-toolbar>
-        <div class="left">
+        <div class="left" id="sidebar">
           <ons-toolbar-button onclick="fn.open()">
             <ons-icon icon="md-menu"></ons-icon>
           </ons-toolbar-button>
         </div>
-        <div class="center">
+        <div class="center" id="name">
           Business
         </div>
-        <div class="right">
-          <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
+        <div class="right" id="expand">
+          <i class="icon ion-md-search" tappable onclick="SearchBar()" id="icons"></i>
+          <ons-search-input id="searchBar" placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)">
+          </ons-search-input>
         </div>
       </ons-toolbar>
       <br>
