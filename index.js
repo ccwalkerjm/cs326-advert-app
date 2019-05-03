@@ -11,18 +11,20 @@ const advert_status_approved = 0;
 const advert_status_blacklisted = 2;
 
 const complain_status_comp = 0;
-const complain_status_blacklisted = 2; 
+const complain_status_blacklisted = 1; 
 
 let complainss = [
   {
     id: 65321,
-    complain:"Limited amount of Ads",
-    complain_status_comp,
+    name:"Limited amount of Ads",
+    complaint: "I think it would be a good idea to add more ads to the front page to give persons more options when they're broswering",
+    status: complain_status_comp,
   },
   {
     id: 63321,
-    complain:"Too many Ads",
-    complain_status_blacklisted,
+    name:"Too many Ads",
+    complaint: "There are too many ads on the home page, it's making my service finish too fast! Unacceptable!",
+    status: complain_status_blacklisted,
   },
       
     
@@ -32,61 +34,73 @@ let adverts = [
   {
     id: 75631,
     name: "Knotsford Court Hotel",
+    img: "image/logo-ex-4.png",
     status: advert_status_approved
   },
   {
     id: 75431,
     name: "Hilton Hotel",
+    img: "image/logo-ex-5.png",
     status: advert_status_approved
   },
   {
     id: 74631,
     name: "Spanish Court Hotel",
+    img: "image/logo-ex-6.png",
     status: advert_status_approved
   },
   {
     id: 75131,
     name: "Holiday Inn Hotel",
+    img: "image/logo-ex-7.png",
     status: advert_status_approved
   },
   {
     id: 75111,
     name: "SeaGarden Beach Resort",
+    img: "image/logo-KPC.png",
     status: advert_status_approved
   },
   {
     id: 75031,
     name: "Great Huts Resort",
+    img: "image/2357cd90cbd5291.jpg",
     status: advert_status_approved
   },
   {
     id: 75931,
     name: "Travellers Beach Resort",
+    img: "image/vector_business_people_circle.png",
     status: advert_status_approved
   },
   {
     id: 76131,
     name: "S Hotel Jamaica",
+    img: "image/vector_business_colourful_people_logo_inspiration.png",
     status: advert_status_pending
   },
   {
     id: 75121,
     name: "Hilton Rose Hall Resort & Spa",
+    img: "image/logo-KPC.png",
     status: advert_status_pending
   },
   {
     id: 75161,
     name: "Grand Palladium Lady Hamilton Resort & Spa",
+    img: "image/logo.png",
     status: advert_status_pending
   },
   {
     id: 75139,
     name: "Half Moon",
+    img: "image/search-results-for-ldquodesigns-psd-rdquo-ndash-calendar-2015-12138.png",
     status: advert_status_blacklisted
   },
   {
     id: 75135,
     name: "Round Hill Hotel and Villas",
+    img: "image/Business-logo-black.png",
     status: advert_status_blacklisted
   },
 
@@ -206,12 +220,13 @@ function changeStatus(e) {
       lstBusinesses.appendChild(
         ons.createElement(`<ons-list-item tappable onclick="alert(event)">
                               <div class="left"> ${businesses[i].name} </div>  
-                              <div class="right"> <b>${ displayStatus(businesses[i].status)} </b></div>
+                             
                             </ons-list-item>`)
       )
     }
   }
 }
+//<div class="right"> <b>${ displayStatus(businesses[i].status)} </b></div>
 
 function changeStat(e){
   const index = e.index;
@@ -225,20 +240,20 @@ function changeStat(e){
     if (index === x_advert.status){
       lstAdverts.appendChild(
         ons.createElement(`<ons-list-item tappable onclick="alert(event)">
-                              <div class="left"> <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"> </div>
+                              <div class="left"> <img class="list-item__thumbnail" src="${adverts[i].img}"> </div>
                               <div class="center">  
                                 <span class="list-item_title">${adverts[i].name}</span>  
                               </div>
-                              <div class="right">
-                                <span class="list-item_subtitle"> <b> ${displayStatus(adverts[i].status)} </b></span>
-                              </div>
+                             
                            </ons-list-item>`)
       )
     }
 
   }
 }
-
+ /* <div class="right">
+                                <span class="list-item_subtitle"> <b> ${displayStatus(adverts[i].status)} </b></span>
+                              </div> */
 function changeST(e) {
   const index = e.index;
   const lstcomplainss = document.querySelector("#lstcomplainss");
@@ -251,8 +266,9 @@ function changeST(e) {
     if (index === x_complains.status) {
       lstcomplainss.appendChild(
         ons.createElement(`<ons-list-item expandable>
-        Tap to expand
-        <div class="expandable-content">${displayStatus(complainss[i].status)}/div>
+        <span class="list-item_title">${complainss[i].name}</span>
+        <div class="expandable-content"> <b>${complainss[i].complaint}</b>
+        /div>
       </ons-list-item>`)
       )
     }
@@ -302,7 +318,7 @@ ons.ready(function() {
         changeStat({index: 0});
     } 
     else if(e.target.id === "businesscomplains"){
-      status_segment = document.querySelector("#business-status");
+      status_segment = document.querySelector("#complaints-status");
       status_segment.addEventListener("postchange",changeST);
       changeST({index: 0});
      } 
