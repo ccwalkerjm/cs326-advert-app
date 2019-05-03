@@ -210,7 +210,9 @@ ons.ready(function() {
       status_segment = document.querySelector("#business-status");
       status_segment.addEventListener("postchange", changeStatus);
       changeStatus({ index: 0 });
-    } else if(e.target.id === "businessAdverts"){
+    } 
+    
+    else if(e.target.id === "businessAdverts"){
         status_segment = document.querySelector("#adverts-status");
         status_segment.addEventListener("postchange",changeStat);
         changeStat({index: 0});
