@@ -124,7 +124,7 @@
         style="width: 100%;"> -->
       <ons-bottom-toolbar>
         <div class="status-style" id="SegmentBars">
-          <ons-segment id="adverts-status" id="SegmentBars" style="width: 100%; height: 100%">
+          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
 
             <button>Accepted</button>
             <button>Pending</button>
@@ -185,7 +185,7 @@
   </template>
 
   <template id="complaints.html">
-    <ons-page>
+    <ons-page id="businesscomplains">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button onclick="fn.open()">
@@ -199,6 +199,8 @@
           <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
         </div>
       </ons-toolbar>
+      <br>
+      <ons-list modifier="inset" modifier="longdivider" id="lstcomplainss"></ons-list>
       <ons-bottom-toolbar>
         <div class="status-style" id="SegmentBars">
           <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
@@ -224,7 +226,7 @@
             Settings
           </div>
           <div class="right">
-            
+            <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
           </div>
         </ons-toolbar>
         <ons-list>

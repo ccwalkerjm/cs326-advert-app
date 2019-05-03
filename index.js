@@ -10,6 +10,24 @@ const advert_status_pending = 1;
 const advert_status_approved = 0;
 const advert_status_blacklisted = 2;
 
+const complain_status_comp = 0;
+const complain_status_blacklisted = 2; 
+
+let complainss = [
+  {
+    id: 65321,
+    complain:"Limited amount of Ads",
+    complain_status_comp,
+  },
+  {
+    id: 63321,
+    complain:"Too many Ads",
+    complain_status_blacklisted,
+  },
+      
+    
+];
+
 let adverts = [
   {
     id: 75631,
@@ -22,14 +40,54 @@ let adverts = [
     status: advert_status_approved
   },
   {
-    id: 75631,
+    id: 74631,
     name: "Spanish Court Hotel",
     status: advert_status_approved
   },
   {
-    id: 75631,
+    id: 75131,
     name: "Holiday Inn Hotel",
+    status: advert_status_approved
+  },
+  {
+    id: 75111,
+    name: "SeaGarden Beach Resort",
+    status: advert_status_approved
+  },
+  {
+    id: 75031,
+    name: "Great Huts Resort",
+    status: advert_status_approved
+  },
+  {
+    id: 75931,
+    name: "Travellers Beach Resort",
+    status: advert_status_approved
+  },
+  {
+    id: 76131,
+    name: "S Hotel Jamaica",
     status: advert_status_pending
+  },
+  {
+    id: 75121,
+    name: "Hilton Rose Hall Resort & Spa",
+    status: advert_status_pending
+  },
+  {
+    id: 75161,
+    name: "Grand Palladium Lady Hamilton Resort & Spa",
+    status: advert_status_pending
+  },
+  {
+    id: 75139,
+    name: "Half Moon",
+    status: advert_status_blacklisted
+  },
+  {
+    id: 75135,
+    name: "Round Hill Hotel and Villas",
+    status: advert_status_blacklisted
   },
 
 ];
@@ -132,6 +190,9 @@ function displayStatus(status){
   }
 }
 
+
+
+
 function changeStatus(e) {
   const index = e.index;
   const lstBusinesses = document.querySelector("#lstBusinesses");
@@ -165,13 +226,36 @@ function changeStat(e){
       lstAdverts.appendChild(
         ons.createElement(`<ons-list-item tappable onclick="alert(event)">
                               <div class="left"> <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"> </div>
-                              <div class="center"> <b> ${displayStatus(adverts[i].status)} </b>
-                                <span class="list-item_title">Cutest kitty</span><span class="list-item_subtitle">On the Internet</span>
+                              <div class="center">  
+                                <span class="list-item_title">${adverts[i].name}</span>  
+                              </div>
+                              <div class="right">
+                                <span class="list-item_subtitle"> <b> ${displayStatus(adverts[i].status)} </b></span>
                               </div>
                            </ons-list-item>`)
       )
     }
 
+  }
+}
+
+function changeST(e) {
+  const index = e.index;
+  const lstcomplainss = document.querySelector("#lstcomplainss");
+
+  lstcomplainss.innerHTML = "";
+
+  for (let i = 0; i <  complainss.length; i++) {
+    const x_complains =  complainss[i];
+
+    if (index === x_complains.status) {
+      lstcomplainss.appendChild(
+        ons.createElement(`<ons-list-item expandable>
+        Tap to expand
+        <div class="expandable-content">${displayStatus(complainss[i].status)}/div>
+      </ons-list-item>`)
+      )
+    }
   }
 }
 
@@ -213,10 +297,15 @@ ons.ready(function() {
     } 
     
     else if(e.target.id === "businessAdverts"){
-        status_segment = document.querySelector("#adverts-status");
+        status_segment = document.querySelector("#business-status");
         status_segment.addEventListener("postchange",changeStat);
         changeStat({index: 0});
-    }
+    } 
+    else if(e.target.id === "businesscomplains"){
+      status_segment = document.querySelector("#business-status");
+      status_segment.addEventListener("postchange",changeST);
+      changeST({index: 0});
+     } 
     console.log(e);
   });
 });
