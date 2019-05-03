@@ -6,6 +6,34 @@ const business_status_approved = 0;
 //const business_status_not_approved = 3;
 const business_status_blacklisted = 2;
 
+const advert_status_pending = 1;
+const advert_status_approved = 0;
+const advert_status_blacklisted = 2;
+
+let adverts = [
+  {
+    id: 75631,
+    name: "Knotsford Court Hotel",
+    status: advert_status_approved
+  },
+  {
+    id: 75431,
+    name: "Hilton Hotel",
+    status: advert_status_approved
+  },
+  {
+    id: 75631,
+    name: "Spanish Court Hotel",
+    status: advert_status_approved
+  },
+  {
+    id: 75631,
+    name: "Holiday Inn Hotel",
+    status: advert_status_pending
+  },
+
+];
+
 let  businesses = [
   {
     id: 34567,
@@ -124,6 +152,35 @@ function changeStatus(e) {
   }
 }
 
+function changeStat(e){
+  const index = e.index;
+  const lstAdverts = document.querySelector("#lstAdverts");
+
+  lstAdverts.innerHTML = "";
+  
+  for (let i = 0; adverts.length; i++){
+    const x_advert = adverts[i];
+
+    if (index === x_advert.status){
+      lstAdverts.appendChild(
+        ons.createElement(`<ons-list-item tappable onclick="alert(event)">
+                              <div class="left"> <img class="list-item__thumbnail" src="https://placekitten.com/g/40/40"> </div>
+                              <div class="center"> <b> ${displayStatus(adverts[i].status)} </b>
+                                <span class="list-item_title">Cutest kitty</span><span class="list-item_subtitle">On the Internet</span>
+                              </div>
+                           </ons-list-item>`)
+      )
+    }
+
+  }
+}
+
+
+
+
+
+
+
 let status_segment;
 
 // Types Section
@@ -153,6 +210,10 @@ ons.ready(function() {
       status_segment = document.querySelector("#business-status");
       status_segment.addEventListener("postchange", changeStatus);
       changeStatus({ index: 0 });
+    } else if(e.target.id === "businessAdverts"){
+        status_segment = document.querySelector("#adverts-status");
+        status_segment.addEventListener("postchange",changeStat);
+        changeStat({index: 0});
     }
     console.log(e);
   });

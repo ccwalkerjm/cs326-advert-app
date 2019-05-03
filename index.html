@@ -110,12 +110,16 @@
           </ons-toolbar-button>
         </div>
         <div class="center">
-          Adverts
+          Adverts 
         </div>
-        <div class="right">
-          <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
+        <div class="right" id="expand">
+          <i class="icon ion-md-search" tappable onclick="SearchBar()" id="icons"></i>
+          <ons-search-input id="searchBar" placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)">
+          </ons-search-input>
         </div>
       </ons-toolbar>
+      <br>
+      <ons-list modifier="inset" modifier="longdivider" id="lstAdverts"></ons-list>
       <!--<input type="search" value="" placeholder="Search" class="search-input search-input--material"
         style="width: 100%;"> -->
       <ons-bottom-toolbar>
@@ -220,9 +224,14 @@
             Settings
           </div>
           <div class="right">
-            <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
+            
           </div>
         </ons-toolbar>
+        <ons-list>
+          <ons-list-header><b>Group Members</b></ons-list-header>
+          <ons-list-item>Jevauhn Robinson</ons-list-item>
+          <ons-list-item>Jamone Moore</ons-list-item>
+          <ons-list-item>Timoy Wallace</ons-list-item>
         
       </ons-page>
     </template>
