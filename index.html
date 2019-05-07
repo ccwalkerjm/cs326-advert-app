@@ -63,6 +63,19 @@
     <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
   </ons-splitter>
 
+  <template id="changeStatus.html">
+    <ons-dialog cancelable>
+      <div style="text-align: center; padding: 10px;" >
+        <div id="my-dialog"> </div>
+        <p style="margin-bottom: 30px; padding: 5%;">
+          <ons-button onclick="ChangeStatusTo()"> Pending </ons-button>
+          <span> <ons-button onclick="ChangeStatusTo()" >Accepted</ons-button> </span>
+          <span> <ons-button onclick="ChangeStatusTo()" >Blocked</ons-button> </span>
+        </p>
+      </div>
+    </ons-dialog>
+  </template>
+
   <template id="home.html">
     <ons-page id="businessPage">
       <ons-toolbar>
@@ -81,7 +94,9 @@
         </div>
       </ons-toolbar>
       <br>
-      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses"></ons-list>
+      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses">
+        
+      </ons-list>
 
 
       <ons-bottom-toolbar>
@@ -124,7 +139,7 @@
         style="width: 100%;"> -->
       <ons-bottom-toolbar>
         <div class="status-style" id="SegmentBars">
-          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
+          <ons-segment id="advert-status" id="SegmentBars" style="width: 100%; height: 100%">
 
             <button>Accepted</button>
             <button>Pending</button>
@@ -137,7 +152,7 @@
   </template>
 
   <template id="types.html">
-    <ons-page>
+    <ons-page id="business-types">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button onclick="fn.open()">
@@ -154,32 +169,36 @@
       <div id="add-button">
         <button class="button button--material--flat" onclick="AddBusiness()">Add Business</button>
       </div>
-      <div id="overlay">
-        <div class="center">
-          <ons-card id="card">
-            <div class="center">
-              <b>Business Category</b>
-            </div>
-            <div class="">
-              <div style="text-align: center; margin-top: 30px;">
-                <p>
-                  <ons-input id="typeName" modifier="underbar" placeholder="Business Name" float></ons-input>
-                </p>
-                <br>
-                <p>
-                  <ons-input id="description" modifier="underbar" type="description" placeholder="Description" float>
-                  </ons-input>
-                </p>
-                <br>
-                <p style="margin-top: 30px;">
-                  <ons-button onclick="Submit()">Submit</ons-button>
-                </p>
-              </div>
-            </div>
-          </ons-card>
-        </div>
-      </div>
 
+      <ons-modal direction="up">
+        <ons-card id="card">
+                  <div class="center">
+                    <b>Business Category</b>
+                  </div>
+                  <div class="">
+                    <div style="text-align: center; margin-top: 30px;">
+                      <p>
+                        <ons-input name="typeName" modifier="underbar" placeholder="Business Name" float></ons-input>
+                      </p>
+                      <br>
+                      <p>
+                        <ons-input name="description" modifier="underbar" type="description" placeholder="Description" float>
+                        </ons-input>
+                      </p>
+                      <br>
+                      <p style="margin-top: 30px;">
+                        <ons-button onclick="Submit()">Submit</ons-button>
+                      </p>
+                    </div>
+                  </div>
+                </ons-card>
+      </ons-modal>
+      
+      <div class="status-style" id="SegmentBars">
+        <ons-segment id="business-types" id="SegmentBars" style="width: 100%; height: 100%">
+
+        </ons-segment>
+      </div>
 
     </ons-page>
   </template>
@@ -239,7 +258,7 @@
     </template>
 
     <template id="login.html">
-      <ons-page>
+      <ons-page id="login" modifier="full_bg" >
         <ons-toolbar>
           <div class="left">
             <ons-toolbar-button onclick="fn.open()">
