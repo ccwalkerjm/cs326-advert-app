@@ -17,17 +17,17 @@ let complainss = [
   {
     id: 65321,
     name: "Limited amount of Ads",
-    complaint: "I think it would be a good idea to add more ads to the front page to give persons more options when they're broswering",
-    status: complain_status_comp,
+    complaint:
+      "I think it would be a good idea to add more ads to the front page to give persons more options when they're broswering",
+    status: complain_status_comp
   },
   {
     id: 63321,
     name: "Too many Ads",
-    complaint: "There are too many ads on the home page, it's making my service finish too fast! Unacceptable!",
-    status: complain_status_blacklisted,
-  },
-
-
+    complaint:
+      "There are too many ads on the home page, it's making my service finish too fast! Unacceptable!",
+    status: complain_status_blacklisted
+  }
 ];
 
 let adverts = [
@@ -94,7 +94,8 @@ let adverts = [
   {
     id: 75139,
     name: "Half Moon",
-    img: "image/search-results-for-ldquodesigns-psd-rdquo-ndash-calendar-2015-12138.png",
+    img:
+      "image/search-results-for-ldquodesigns-psd-rdquo-ndash-calendar-2015-12138.png",
     status: advert_status_blacklisted
   },
   {
@@ -102,18 +103,14 @@ let adverts = [
     name: "Round Hill Hotel and Villas",
     img: "image/Business-logo-black.png",
     status: advert_status_blacklisted
-  },
-
+  }
 ];
-
-
 
 let businesses = [
   {
     id: 34567,
     name: "T&T Company",
     status: business_status_pending
-
   },
   {
     id: 34378,
@@ -188,69 +185,65 @@ businesses.sort();
 
 window.fn = {};
 
-window.fn.open = function () {
+window.fn.open = function() {
   var menu = document.getElementById("menu");
   menu.open();
 };
 
-window.fn.load = function (page) {
+window.fn.load = function(page) {
   var content = document.getElementById("content");
   var menu = document.getElementById("menu");
   content.load(page).then(menu.close.bind(menu));
 };
 
-
 function displayStatus(status) {
   switch (status) {
-    case 0: return "Accepted";
-    case 1: return "Pending";
-    case 2: return "Blocked";
+    case 0:
+      return "Accepted";
+    case 1:
+      return "Pending";
+    case 2:
+      return "Blocked";
   }
 }
 
-function dialog(){
-  var dialog = document.getElementById('my-dialog');
+function dialog() {
+  var dialog = document.getElementById("my-dialog");
 
   if (dialog) {
     dialog.show();
   } else {
-    ons.createElement('changeStatus.html', { append: true })
+    ons
+      .createElement("changeStatus.html", { append: true })
       .then(function(dialog) {
         dialog.show();
       });
   }
-
 }
- function hideDialog() {
-   document
-  .getElementById('my-dialog')
-  .show();
-  
-    
+function hideDialog() {
+  document.getElementById("my-dialog").show();
 }
 
-
-function displayProfile( ID, NAME, STATUS) {
-  
-  
-  document.getElementById("my-dialog").innerHTML = "<div class='center'> <div id='card'> <h1>" + NAME +" </h1> <br> <p> <b>ID:</b> <span>" + ID +" </span> </p> <br> <p> <b> Status: </b> <span>" + STATUS +" </span> <br> <span class='center'> Change Status </span> </p> </div> </div>";
+function displayProfile(ID, NAME, STATUS) {
+  document.getElementById("my-dialog").innerHTML =
+    "<div class='center'> <div id='card'> <h1>" +
+    NAME +
+    " </h1> <br> <p> <b>ID:</b> <span>" +
+    ID +
+    " </span> </p> <br> <p> <b> Status: </b> <span>" +
+    STATUS +
+    " </span> <br> <span class='center'> Change Status </span> </p> </div> </div>";
   dialog();
- // lstBusinessesCard 
-  
-  
-      
- /*     lstBusinessesCard.appendChild(
+  // lstBusinessesCard
+
+  /*     lstBusinessesCard.appendChild(
       ons.createElement(`
         
       
                  `)
       )*/
-      //document.getElementById("card").style.width = "100%";
-    }
-
-
-
-
+  //document.getElementById("card").style.width = "100%";
+}
 
 function ChangeStatusToPending(e) {
   /* var status = 
@@ -273,11 +266,13 @@ function changeStatus(e) {
 
     if (index === x_business.status) {
       lstBusinesses.appendChild(
-        ons.createElement(`<ons-list-item tappable onclick="displayProfile('${businesses[i].id}','${businesses[i].name}','${businesses[i].status}')">
+        ons.createElement(`<ons-list-item tappable onclick="displayProfile('${
+          businesses[i].id
+        }','${businesses[i].name}','${businesses[i].status}')">
                               <div class="left"> ${businesses[i].name} </div>  
                              
                             </ons-list-item>`)
-      )
+      );
     }
   }
 }
@@ -295,16 +290,18 @@ function changeStat(e) {
     if (index === x_advert.status) {
       lstAdverts.appendChild(
         ons.createElement(`<ons-list-item tappable onclick="alert(event)">
-                              <div class="left"> <img class="list-item__thumbnail" src="${adverts[k].img}"> </div>
+                              <div class="left"> <img class="list-item__thumbnail" src="${
+                                adverts[k].img
+                              }"> </div>
                               <div class="center">  
-                                <span class="list-item_title">${adverts[k].name}</span>  
+                                <span class="list-item_title">${
+                                  adverts[k].name
+                                }</span>  
                               </div>
                             
                            </ons-list-item>`)
-
-      )
+      );
     }
-
   }
 }
 /* <div class="right">
@@ -326,25 +323,17 @@ function changeST(e) {
         <div class="expandable-content"> <b>${complainss[i].complaint}</b>
         /div>
       </ons-list-item>`)
-      )
+      );
     }
   }
 }
-
-
-
-
-
-
 
 let status_segment;
 
 // Types Section
 function AddBusiness() {
-  var modal = document.querySelector('ons-modal');
+  var modal = document.querySelector("ons-modal");
   modal.show();
-
-
 }
 
 function Submit() {
@@ -354,21 +343,19 @@ function Submit() {
 
   var typess = {
     name: names,
-    description: description,
-
+    description: description
   };
 
-  fs.writeFile("js/types.json", JSON.stringify(typess, null, 2), (err) => {
+  fs.writeFile("js/types.json", JSON.stringify(typess, null, 2), err => {
     if (err) {
       console.error(err);
       return;
-    };
+    }
     console.log("File has been created");
   });
 
-  var modal = document.querySelector('ons-modal');
+  var modal = document.querySelector("ons-modal");
   modal.hide();
-
 }
 
 function SearchBar() {
@@ -377,37 +364,51 @@ function SearchBar() {
   document.getElementById("sidebar").style.display = "none";
   document.getElementById("expand").style.width = "100%";
   document.getElementById("searchBar").style.display = "block";
-
-
 }
 
-ons.ready(function () {
-  //activate application inside here, including all events...
+class AccountForm {
+  setForm() {
+    alert(this.type);
+  }
+  constructor(type) {
+    this.type = type;
+  }
+}
 
-  document.addEventListener("init", function (e) {
+let cloudapi;
+ons.ready(function() {
+  //activate application inside here, including all events...
+  new COURSERV_API_CLASS((err, _ws) => {
+    cloudapi = _ws;
+
+    //check if user is signed in
+    if (!cloudapi.username) {
+      var modal = document.querySelector("#loginModal").show();
+      const forme = new AccountForm(1);
+      forme.setForm();
+      //modal.show();
+    }
+  });
+
+  document.addEventListener("init", function(e) {
     if (e.target.id === "businessPage") {
       status_segment = document.querySelector("#business-status");
       status_segment.addEventListener("postchange", changeStatus);
       changeStatus({ index: 0 });
-    }
-
-    else if (e.target.id === "businessAdverts") {
+    } else if (e.target.id === "businessAdverts") {
       status_segment = document.querySelector("#advert-status");
       status_segment.addEventListener("postchange", changeStat);
       changeStat({ index: 0 });
-    }
-    else if (e.target.id === "businesscomplains") {
+    } else if (e.target.id === "businesscomplains") {
       status_segment = document.querySelector("#complaints-status");
       status_segment.addEventListener("postchange", changeST);
       changeST({ index: 0 });
-    }
-    else if (e.target.id === "businesstypes") {
-      readTextFile("types.json", function (text) {
+    } else if (e.target.id === "businesstypes") {
+      readTextFile("types.json", function(text) {
         var typess = JSON.parse(text);
         console.log(typess);
-      })
+      });
       status_segment = document.querySelector("#business-types");
-
     }
     console.log(e);
   });
