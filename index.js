@@ -366,26 +366,306 @@ function SearchBar() {
   document.getElementById("searchBar").style.display = "block";
 }
 
-class AccountForm {
-  setForm() {
-    alert(this.type);
+class AccountFormClass {
+  type;
+  $username;
+  $given_name;
+  $family_name;
+  $birthdate;
+  $gender;
+  $phone_number;
+  $email;
+  $password;
+  $confirmPassword;
+  $title;
+  $submit;
+  $signupLink;
+  $loginLink;
+  $forgotLink;
+  $verificationCode;
+  $progressBar;
+  callback_obj;
+  setForm(type) {
+    this.type = type >= 0 ? type : this.type;
+    switch (this.type) {
+      case loginMode:
+        this.$username.parentNode.style.display = "block";
+        this.$email.parentNode.style.display = "none";
+
+        this.$given_name.parentNode.style.display = "none";
+        this.$family_name.parentNode.style.display = "none";
+        this.$birthdate.parentNode.style.display = "none";
+        this.$gender.parentNode.style.display = "none";
+        this.$phone_number.parentNode.style.display = "none";
+
+        this.$password.parentNode.style.display = "block";
+        this.$confirmPassword.parentNode.style.display = "none";
+        this.$verificationCode.parentNode.style.display = "none";
+        this.$title.innerHTML = "Login";
+        this.$submit.innerHTML = "Sign In";
+        this.$signupLink.style.display = "inline"; //
+        this.$loginLink.style.display = "none"; ///
+        this.$forgotLink.style.display = "inline"; //
+        break;
+      case registerMode:
+        this.$username.parentNode.style.display = "block";
+        this.$email.parentNode.style.display = "block";
+
+        this.$given_name.parentNode.style.display = "block";
+        this.$family_name.parentNode.style.display = "block";
+        this.$birthdate.parentNode.style.display = "block";
+        this.$gender.parentNode.style.display = "block";
+        this.$phone_number.parentNode.style.display = "block";
+
+        this.$password.parentNode.style.display = "block";
+        this.$confirmPassword.parentNode.style.display = "block";
+        this.$verificationCode.parentNode.style.display = "none";
+        this.$title.innerHTML = "Sign Up";
+        this.$submit.innerHTML = "Submit";
+        this.$signupLink.style.display = "none"; //
+        this.$loginLink.style.display = "inline"; ///
+        this.$forgotLink.style.display = "none"; //
+        break;
+      case forgotMode:
+        this.$username.parentNode.style.display = "block";
+        this.$email.parentNode.style.display = "none";
+        this.$given_name.parentNode.style.display = "none";
+        this.$family_name.parentNode.style.display = "none";
+        this.$birthdate.parentNode.style.display = "none";
+        this.$gender.parentNode.style.display = "none";
+        this.$phone_number.parentNode.style.display = "none";
+        this.$password.parentNode.style.display = "none";
+        this.$confirmPassword.parentNode.style.display = "none";
+        this.$verificationCode.parentNode.style.display = "none";
+        this.$title.innerHTML = "Forgot Password";
+        this.$submit.innerHTML = "Submit";
+        this.$signupLink.style.display = "inline"; //
+        this.$loginLink.style.display = "inline"; ///
+        this.$forgotLink.style.display = "none"; //
+        break;
+      case confirmRegistrationMode:
+        this.$username.parentNode.style.display = "block";
+        this.$username.setAttribute("readonly", true);
+        this.$email.parentNode.style.display = "none";
+        this.$given_name.parentNode.style.display = "none";
+        this.$family_name.parentNode.style.display = "none";
+        this.$birthdate.parentNode.style.display = "none";
+        this.$gender.parentNode.style.display = "none";
+        this.$phone_number.parentNode.style.display = "none";
+        this.$password.parentNode.style.display = "none";
+        this.$confirmPassword.parentNode.style.display = "none";
+        this.$verificationCode.parentNode.style.display = "block";
+        this.$title.innerHTML = "Signup: Confirm Email";
+        this.$submit.innerHTML = "Submit";
+        this.$signupLink.style.display = "none"; //
+        this.$loginLink.style.display = "none"; ///
+        this.$forgotLink.style.display = "none"; //
+        break;
+      case confirmVerificationMode:
+        this.$username.parentNode.style.display = "block";
+        this.$username.setAttribute("readonly", true);
+        this.$email.parentNode.style.display = "none";
+        this.$given_name.parentNode.style.display = "none";
+        this.$family_name.parentNode.style.display = "none";
+        this.$birthdate.parentNode.style.display = "none";
+        this.$gender.parentNode.style.display = "none";
+        this.$phone_number.parentNode.style.display = "none";
+        this.$password.parentNode.style.display = "block";
+        this.$confirmPassword.parentNode.style.display = "block";
+        this.$verificationCode.parentNode.style.display = "block";
+        this.$title.innerHTML = "Verify Code";
+        this.$submit.innerHTML = "Submit";
+        this.$signupLink.style.display = "none"; //
+        this.$loginLink.style.display = "none"; ///
+        this.$forgotLink.style.display = "none"; //
+    }
   }
+
+  setAccountSpinner(active) {
+    if (active) {
+      this.$submit.setAttribute("disabled", true);
+      this.$progressBar.style.display = "block";
+    } else {
+      this.$submit.removeAttribute("disabled");
+      this.$progressBar.style.display = "none";
+    }
+  }
+
+  displayStatus(message, isError) {
+    ons.notification.toast((iserror ? "Error:" : "") + message, {
+      timeout: 2000
+    });
+  }
+
+  submit() {
+    let _self = this;
+    switch (_self.type) {
+      case registerMode: {
+        if (_self.$password.value !== _self.$password.value) {
+          _self.displayStatus("Passwords not matched", true);
+          return;
+        }
+        const data = {
+          username: _self.$username.value,
+          email: _self.$email.value,
+          password: _self.$password.value,
+          given_name: _self.$given_name.value,
+          family_name: _self.$family_name.value,
+          birthdate: _self.$birthdate.value,
+          gender: _self.$gender.value,
+          phone_number: _self.$phone_number.value
+        };
+        const process_signup = function(err, resp) {
+          _self.setAccountSpinner(false);
+          if (err) {
+            _self.displayStatus(err.message, err);
+          } else {
+            _self.setForm(confirmRegistrationMode);
+          }
+        };
+        _self.setAccountSpinner(true);
+        return cloudapi.signup(data, process_signup);
+      }
+      case confirmRegistrationMode: {
+        const process_confirmSignup = function(err, resp) {
+          _self.setAccountSpinner(false);
+          if (err) {
+            _self.displayStatus(err.message, err);
+          } else {
+            $accountModal.hide();
+            _self.displayStatus("You are now registered");
+          }
+        };
+        _self.setAccountSpinner(true);
+        return cloudapi.confirmSignup(
+          _self.$username.value,
+          _self.$verificationCode.value,
+          process_confirmSignup
+        );
+      }
+      case loginMode: {
+        const process_login = function(
+          err,
+          checkNewUser,
+          $this,
+          userAttributes,
+          requiredAttributes
+        ) {
+          _self.setAccountSpinner(false);
+          $accountModal.hide();
+          if (err) _self.displayStatus(err.message, true);
+          else if (checkNewUser) {
+            ///not used
+            _self.callback_obj = $this;
+          } else {
+            $accountModal.hide();
+            _self.displayStatus("You are logged in..");
+          }
+        };
+
+        _self.setAccountSpinner(true);
+        return cloudapi.signin(
+          _self.$username.value,
+          _self.$password.value,
+          process_login
+        );
+      }
+
+      case forgotMode: {
+        const email = $form.find("#email").val();
+        const process_forgotpassword = function(err, verification_cb) {
+          _self.setAccountSpinner(false);
+          if (err) return _self.displayStatus(err.message, err);
+          //reset menu  ///_LNK_confirmProfile
+          if (verification_cb) {
+            _self.setForm(confirmVerificationMode);
+            _self.callback_obj = verification_cb;
+          } else {
+            _self.setForm(loginMode);
+            _self.displayStatus("Password Changed. You can now login");
+          }
+        };
+        _self.setAccountSpinner(true);
+        return cloudapi.forgotPassword(email, process_forgotpassword);
+      }
+      case confirmVerificationMode: {
+        if (
+          !_self.$password.value ||
+          _self.$password.value != _self.$confirmPassword.value
+        )
+          return _self.displayStatus("Passwords Not Matched!", true);
+        _self.setAccountSpinner(true);
+        return cloudapi.confirmPassword(
+          _self.$verificationCode.value,
+          _self.$password.value,
+          _self.callback_obj
+        );
+      }
+    }
+  }
+
+  logout() {
+    cloudapi.signoff();
+    $accountModal.show();
+  }
+
+  switchToSignup() {
+    this.type = registerMode;
+    this.setForm();
+  }
+  switchToForgot() {
+    this.type = forgotMode;
+    this.setForm();
+  }
+  switchToLogin() {
+    this.type = loginMode;
+    this.setForm();
+  }
+
   constructor(type) {
     this.type = type;
+    this.$username = $accountModal.querySelector(".username");
+    this.$email = $accountModal.querySelector(".email");
+
+    this.$given_name = $accountModal.querySelector(".given_name");
+    this.$family_name = $accountModal.querySelector(".family_name");
+    this.$birthdate = $accountModal.querySelector(".birthdate");
+    this.$gender = $accountModal.querySelector(".gender");
+    this.$phone_number = $accountModal.querySelector(".phone_number");
+
+    this.$password = $accountModal.querySelector(".password");
+    this.$confirmPassword = $accountModal.querySelector(".confirmPassword");
+    this.$title = $accountModal.querySelector(".title");
+    this.$submit = $accountModal.querySelector(".submitBtn");
+    this.$signupLink = $accountModal.querySelector(".signupLink");
+    this.$loginLink = $accountModal.querySelector(".loginLink");
+    this.$forgotLink = $accountModal.querySelector(".forgotLink");
+    this.$verificationCode = $accountModal.querySelector(".verificationCode");
+    this.$progressBar = $accountModal.querySelector("ons-progress-bar");
+    this.setForm();
   }
 }
+
+const loginMode = 0;
+const registerMode = 1;
+const forgotMode = 2;
+const confirmRegistrationMode = 3;
+const confirmVerificationMode = 4;
+let $accountModal;
+let x_accountForm;
 
 let cloudapi;
 ons.ready(function() {
   //activate application inside here, including all events...
+  $accountModal = document.querySelector("#accountModal");
+
   new COURSERV_API_CLASS((err, _ws) => {
     cloudapi = _ws;
-
+    x_accountForm = new AccountFormClass(loginMode);
     //check if user is signed in
-    if (!cloudapi.username) {
-      var modal = document.querySelector("#loginModal").show();
-      const forme = new AccountForm(1);
-      forme.setForm();
+    if (!cloudapi.getUsername()) {
+      $accountModal.show();
+      //x_accountForm.setForm();
       //modal.show();
     }
   });

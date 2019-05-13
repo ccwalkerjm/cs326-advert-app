@@ -294,15 +294,6 @@ COURSERV_API_CLASS.prototype.signup = (userData, callback) => {
     })
   );
 
-  attributeList.push(
-    new AWSCognito.CognitoIdentityServiceProvider.CognitoUserAttribute({
-      Name: "website",
-      Value: document.location.origin
-    })
-  );
-
-  //const username = userData.email.replace('@', '0').replace('.', '1') + _generateRandomCode(1, 1, 2);
-
   //using attributeList for null...
   _self.userPool.signUp(
     userData.username,
@@ -323,12 +314,12 @@ COURSERV_API_CLASS.prototype.signup = (userData, callback) => {
 };
 
 COURSERV_API_CLASS.prototype.confirmSignup = (
-  key,
+  username,
   verificationCode,
   callback
 ) => {
   const userData = {
-    Username: atob(key),
+    Username: username,
     Pool: _self.userPool
   };
   _self.cognitoUser = new AWSCognito.CognitoIdentityServiceProvider.CognitoUser(
