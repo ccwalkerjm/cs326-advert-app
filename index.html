@@ -14,21 +14,18 @@
   <link rel="stylesheet" href="css/onsen-css-components.css">
   <link rel="stylesheet" href="index.css" />
   <link href="https://unpkg.com/ionicons@4.5.5/dist/css/ionicons.min.css" rel="stylesheet">
+  <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
   <script src="js/onsenui.js"></script>
   <script src="js/jquery.js"></script>
+  <script src="js/cloudapi/jsbn.js"></script>
+  <script src="js/cloudapi/jsbn2.js"></script>
+  <script src="js/cloudapi/sjcl.js"></script>
+  <script src="js/moment.min.js"></script>
+  <script src="js/cloudapi/aws-cognito-sdk.min.js"></script>
+  <script src="js/cloudapi/amazon-cognito-identity.min.js"></script>
+  <script src="js/cloudapi/aws-sdk-2.9.0.min.js"></script>
+  <script src="js/cloudapi/courserv_cloud_api.js"></script>
   <script src="index.js"></script>
-  <script>
-    if ("serviceWorker" in navigator) {
-      navigator.serviceWorker
-        .register("sw.js")
-        .then(function () {
-          console.log("Service Worker Registered");
-        })
-        .catch(function (e) {
-          console.log(e);
-        });
-    }
-  </script>
 </head>
 
 <body>
@@ -49,8 +46,8 @@
             Complains
           </ons-list-item>
           <ons-list-item onclick="fn.load('login.html')" tappable>
-            Login 
-        </ons-list-item>
+            Login
+          </ons-list-item>
         </ons-list>
 
         <div class="fixed">
@@ -62,6 +59,98 @@
     </ons-splitter-side>
     <ons-splitter-content id="content" page="home.html"></ons-splitter-content>
   </ons-splitter>
+
+
+
+  <ons-modal id="accountModal" direction="up">
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+
+        </div>
+
+        <div class="center title">Login</div>
+
+        <div class="right">
+          <ons-toolbar-button>+</ons-toolbar-button>
+          <ons-toolbar-button>-</ons-toolbar-button>
+        </div>
+      </ons-toolbar>
+      <div style="text-align: center; margin-top: 30px;">
+        <p>
+          <ons-input class="username" modifier="underbar" placeholder="Username" float></ons-input>
+        </p>
+        <p>
+          <ons-input class="email" modifier="underbar" type="email" placeholder="Email" float></ons-input>
+        </p>
+        <p>
+          <ons-input class="phone_number" type="tel" modifier="underbar" placeholder="Mobile Number" float></ons-input>
+        </p>
+
+        <p>
+          <ons-input class="verificationCode" modifier="underbar" type="text" placeholder="Verification Code" float>
+          </ons-input>
+        </p>
+        <p>
+          <ons-input class="password" modifier="underbar" type="password" placeholder="Password" float></ons-input>
+        </p>
+        <p>
+          <ons-input class="confirmPassword" modifier="underbar" type="password" placeholder="Confirm Password" float>
+          </ons-input>
+        </p>
+
+        <p>
+          <ons-input class="given_name" modifier="underbar" placeholder="First Name" float></ons-input>
+        </p>
+        <p>
+          <ons-input class="family_name" modifier="underbar" placeholder="Family Name" float></ons-input>
+        </p>
+        <p>
+          Date of Birth<br/><ons-input class="birthdate" type="date" modifier="underbar" placeholder="Date of Birth" float></ons-input>
+        </p>
+        <p>
+          <ons-select class="gender" modifier="underbar">
+            <option value="male">Select Gender</option>
+            <option value="male">Male</option>
+            <option value="female">Female</option>
+          </ons-select>
+        </p>
+
+
+
+        <p style="margin-top: 30px;">
+          <ons-progress-bar indeterminate style="display: none"></ons-progress-bar>
+          <ons-button class="submitBtn" onclick="x_accountForm.submit()">Sign in</ons-button>
+          <p><a href="#" class="signupLink" onclick="x_accountForm.switchToSignup()">Not yet Signed up, Click to
+              Signup</a> <br />
+            <a href="#" class="forgotLink" onclick="x_accountForm.switchToForgot()">Forgot Password, Click to Recover
+              Password</a>
+            <a href="#" class="loginLink" onclick="x_accountForm.switchToLogin()">Already a member, Click to Sign in</a>
+          </p>
+        </p>
+      </div>
+      <ons-bottom-toolbar>
+        Content
+      </ons-bottom-toolbar>
+    </ons-page>
+  </ons-modal>
+
+  <template id="changeStatus.html">
+    <ons-dialog cancelable>
+      <div style="text-align: center; padding: 10px;">
+        <div id="my-dialog"> </div>
+        <p style="margin-bottom: 30px; padding: 5%;">
+          <ons-button onclick="ChangeStatusTo()"> Pending </ons-button>
+          <span>
+            <ons-button onclick="ChangeStatusTo()">Accepted</ons-button>
+          </span>
+          <span>
+            <ons-button onclick="ChangeStatusTo()">Blocked</ons-button>
+          </span>
+        </p>
+      </div>
+    </ons-dialog>
+  </template>
 
   <template id="home.html">
     <ons-page id="businessPage">
@@ -75,13 +164,19 @@
           Business
         </div>
         <div class="right" id="expand">
-          <i class="icon ion-md-search" tappable onclick="SearchBar()" id="icons"></i>
-          <ons-search-input id="searchBar" placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)">
-          </ons-search-input>
+          <!-- <i class="icon ion-md-search" tappable onclick="SearchBar()" id="icons"></i>
+          <ons-search-input id="searchBar" placeholder="Search"
+            onchange="ons.notification.alert('Searched for: ' + this.value)">
+          </ons-search-input> -->
+          <ons-toolbar-button onclick="x_accountForm.logout()">
+            <ons-icon icon="md-close"></ons-icon>
+          </ons-toolbar-button>
         </div>
       </ons-toolbar>
       <br>
-      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses"></ons-list>
+      <ons-list modifier="inset" modifier="longdivider" id="lstBusinesses">
+
+      </ons-list>
 
 
       <ons-bottom-toolbar>
@@ -110,11 +205,12 @@
           </ons-toolbar-button>
         </div>
         <div class="center">
-          Adverts 
+          Adverts
         </div>
         <div class="right" id="expand">
           <i class="icon ion-md-search" tappable onclick="SearchBar()" id="icons"></i>
-          <ons-search-input id="searchBar" placeholder="Search" onchange="ons.notification.alert('Searched for: ' + this.value)">
+          <ons-search-input id="searchBar" placeholder="Search"
+            onchange="ons.notification.alert('Searched for: ' + this.value)">
           </ons-search-input>
         </div>
       </ons-toolbar>
@@ -124,7 +220,7 @@
         style="width: 100%;"> -->
       <ons-bottom-toolbar>
         <div class="status-style" id="SegmentBars">
-          <ons-segment id="business-status" id="SegmentBars" style="width: 100%; height: 100%">
+          <ons-segment id="advert-status" id="SegmentBars" style="width: 100%; height: 100%">
 
             <button>Accepted</button>
             <button>Pending</button>
@@ -137,7 +233,7 @@
   </template>
 
   <template id="types.html">
-    <ons-page>
+    <ons-page id="business-types">
       <ons-toolbar>
         <div class="left">
           <ons-toolbar-button onclick="fn.open()">
@@ -154,32 +250,36 @@
       <div id="add-button">
         <button class="button button--material--flat" onclick="AddBusiness()">Add Business</button>
       </div>
-      <div id="overlay">
-        <div class="center">
-          <ons-card id="card">
-            <div class="center">
-              <b>Business Category</b>
-            </div>
-            <div class="">
-              <div style="text-align: center; margin-top: 30px;">
-                <p>
-                  <ons-input id="typeName" modifier="underbar" placeholder="Business Name" float></ons-input>
-                </p>
-                <br>
-                <p>
-                  <ons-input id="description" modifier="underbar" type="description" placeholder="Description" float>
-                  </ons-input>
-                </p>
-                <br>
-                <p style="margin-top: 30px;">
-                  <ons-button onclick="Submit()">Submit</ons-button>
-                </p>
-              </div>
-            </div>
-          </ons-card>
-        </div>
-      </div>
 
+      <ons-modal direction="up">
+        <ons-card id="card">
+          <div class="center">
+            <b>Business Category</b>
+          </div>
+          <div class="">
+            <div style="text-align: center; margin-top: 30px;">
+              <p>
+                <ons-input name="typeName" modifier="underbar" placeholder="Business Name" float></ons-input>
+              </p>
+              <br>
+              <p>
+                <ons-input name="description" modifier="underbar" type="description" placeholder="Description" float>
+                </ons-input>
+              </p>
+              <br>
+              <p style="margin-top: 30px;">
+                <ons-button onclick="Submit()">Submit</ons-button>
+              </p>
+            </div>
+          </div>
+        </ons-card>
+      </ons-modal>
+
+      <div class="status-style" id="SegmentBars">
+        <ons-segment id="business-types" id="SegmentBars" style="width: 100%; height: 100%">
+
+        </ons-segment>
+      </div>
 
     </ons-page>
   </template>
@@ -215,70 +315,81 @@
   </template>
 
   <template id="settings.html">
-      <ons-page>
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button onclick="fn.open()">
-              <ons-icon icon="md-menu"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-          <div class="center">
-            Settings
-          </div>
-          <div class="right">
-            <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
-          </div>
-        </ons-toolbar>
-        <ons-list>
-          <ons-list-header><b>Group Members</b></ons-list-header>
-          <ons-list-item>Jevauhn Robinson</ons-list-item>
-          <ons-list-item>Jamone Moore</ons-list-item>
-          <ons-list-item>Timoy Wallace</ons-list-item>
-        
-      </ons-page>
-    </template>
-
-    <template id="login.html">
-      <ons-page>
-        <ons-toolbar>
-          <div class="left">
-            <ons-toolbar-button onclick="fn.open()">
-              <ons-icon icon="md-menu"></ons-icon>
-            </ons-toolbar-button>
-          </div>
-          <div class="center">
-            Login
-          </div>
-        </ons-toolbar>
-        <div class="center">
-          <ons-card id="card">
-              <div class="center">
-                  <b>Login</b>
-                </div>
-             <div class="">
-                <div style="text-align: center; margin-top: 30px;">
-                  <p>
-                    <ons-input id="typeName" modifier="underbar" placeholder="Username" float></ons-input>
-                  </p>
-                  <br>
-                  <p>
-                    <ons-input id="description" modifier="underbar" type="password" placeholder="Password" float>
-                    </ons-input>
-                  </p>
-                  <br>
-                  <p style="margin-top: 30px;">
-                    <ons-button onclick="Submit()">Submit</ons-button>
-                  </p>
-                </div>
-              </div>
-            </ons-card>
-          </div>
+    <ons-page>
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
         </div>
+        <div class="center">
+          Settings
+        </div>
+        <div class="right">
+          <i class="icon ion-md-search" tappable onclick="alert(event)" id="icons"></i>
+        </div>
+      </ons-toolbar>
+      <ons-list>
+        <ons-list-header><b>Group Members</b></ons-list-header>
+        <ons-list-item>Jevauhn Robinson</ons-list-item>
+        <ons-list-item>Jamone Moore</ons-list-item>
+        <ons-list-item>Timoy Wallace</ons-list-item>
 
-        
-      </ons-page>
-    </template>
-  <script src="https://unpkg.com/ionicons@4.5.5/dist/ionicons.js"></script>
+    </ons-page>
+  </template>
+
+  <template id="login.html">
+    <ons-page id="login" modifier="full_bg">
+      <ons-toolbar>
+        <div class="left">
+          <ons-toolbar-button onclick="fn.open()">
+            <ons-icon icon="md-menu"></ons-icon>
+          </ons-toolbar-button>
+        </div>
+        <div class="center">
+          Login
+        </div>
+      </ons-toolbar>
+      <div class="center">
+        <ons-card id="card">
+          <div class="center">
+            <b>Login</b>
+          </div>
+          <div class="">
+            <div style="text-align: center; margin-top: 30px;">
+              <p>
+                <ons-input id="typeName" modifier="underbar" placeholder="Username" float></ons-input>
+              </p>
+              <br>
+              <p>
+                <ons-input id="description" modifier="underbar" type="password" placeholder="Password" float>
+                </ons-input>
+              </p>
+              <br>
+              <p style="margin-top: 30px;">
+                <ons-button onclick="Submit()">Submit</ons-button>
+              </p>
+            </div>
+          </div>
+        </ons-card>
+      </div>
+      </div>
+
+
+    </ons-page>
+  </template>
+  <script>
+    if ("serviceWorker" in navigator) {
+      navigator.serviceWorker
+        .register("sw.js")
+        .then(function () {
+          console.log("Service Worker Registered");
+        })
+        .catch(function (e) {
+          console.log(e);
+        });
+    }
+  </script>
 </body>
 
 
