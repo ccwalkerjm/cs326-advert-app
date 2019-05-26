@@ -103,6 +103,24 @@ let adverts = [
     img: "image/Business-logo-black.png",
     status: advert_status_blacklisted
   },
+  {
+    id: 75631,
+    name: "Art's Car Mart",
+    img: "image/arts-car-mart.jpg",
+    status: advert_status_approved
+  },
+  {
+    id: 75631,
+    name: "ATL Automotive Jamaica",
+    img: "image/atl.png",
+    status: advert_status_approved
+  },
+  {
+    id: 75631,
+    name: "Audi Jamaica",
+    img: "image/audi.png",
+    status: advert_status_approved
+  },
 
 ];
 
